@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import java.io.File;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
@@ -41,6 +42,18 @@ public class Claymore extends MinerCommon implements Algorithm {
         }
     };
 
+    private TimerTask logsTask = new TimerTask() {
+        @Override
+        public void run() {
+            File directory = new File(minerDirectory);
+            Callable<String> log = new LogAnalytic(directory);
+            FutureTask<String> task = new FutureTask<>(log);
+            Thread t = new Thread(task);
+            t.start();
+
+        }
+    };
+
     public Claymore() {
         port = Integer.parseInt(Settings.getInstance().getProperties("remotePort"));
         minerDirectory = Settings.getInstance().getProperties("DirectoryText");
@@ -48,15 +61,23 @@ public class Claymore extends MinerCommon implements Algorithm {
     }
 
     public void startAlgorithm() {
-        tcpTimer = new Timer();
-        tcpTimer.schedule(tcpTask, 0, 1000);
+//        tcpTimer = new Timer();
+//        tcpTimer.schedule(tcpTask, 0, 1000);
+        if (useLogs) {
+            logsTimer = new Timer();
+            logsTimer.schedule(logsTask, 0, 60000);
+        }
     }
 
     public void stopAlgorithm() {
         tcpTimer.cancel();
+        if (useLogs) {
+            logsTimer.cancel();
+        }
     }
 
-    public void sendData(JSONObject data) {
+//    public void sendData(JSONObject data) {
+//        super.sendData(data);
+//    }
 
-    }
 }

@@ -14,8 +14,4 @@ public interface Algorithm {
      */
     void stopAlgorithm();
 
-    /**
-     * Send received statistic to server.
-     */
-    void sendData(JSONObject data);
 }

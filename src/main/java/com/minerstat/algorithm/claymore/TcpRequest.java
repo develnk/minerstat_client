@@ -42,7 +42,6 @@ public class TcpRequest extends MinerCommon implements Callable<String> {
         map.put("id", 0);
         map.put("jsonrpc", "2.0");
         map.put("method", "miner_getstat1");
-        String x = map.toString();
         JSONObject result = dataToSend(map);
         return result.toString();
     }
