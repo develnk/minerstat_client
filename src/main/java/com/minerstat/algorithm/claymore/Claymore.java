@@ -61,8 +61,8 @@ public class Claymore extends MinerCommon implements Algorithm {
     }
 
     public void startAlgorithm() {
-//        tcpTimer = new Timer();
-//        tcpTimer.schedule(tcpTask, 0, 1000);
+        tcpTimer = new Timer();
+        tcpTimer.schedule(tcpTask, 0, 1000);
         if (useLogs) {
             logsTimer = new Timer();
             logsTimer.schedule(logsTask, 0, 60000);

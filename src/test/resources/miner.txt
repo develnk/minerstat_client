@@ -1,0 +1,457 @@
+22:26:39:777	631f9740	args: -epool eu1.ethermine.org:4444 -ewal 0x1A2Ee27C0f1701385300027a78E7183dE2Ad8439.develnk5 -epsw x -dpool stratum+tcp://dcr-as.coinmine.pl:2222 -dwal develnk.worker5 -dpsw 5FHoV -allpools 1 -asm 1
+22:26:39:777	631f9740
+22:26:39:777	631f9740	ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+22:26:39:777	631f9740	º      Claymore's Dual ETH + DCR/SC/LBC/PASC GPU Miner v9.7      º
+22:26:39:777	631f9740	ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+22:26:39:777	631f9740
+22:40:57:734	1efc	ETH: 1 pool is specified
+22:40:57:734	1efc	Main Ethereum pool is eu1.ethermine.org:4444
+22:40:57:734	1efc	DCR: 1 pool is specified
+22:40:57:734	1efc	Main Decred pool is dcr-as.coinmine.pl:2222
+22:40:58:874	1efc	OpenCL platform: AMD Accelerated Parallel Processing
+22:40:58:874	1efc	OpenCL initializing...
+
+22:40:58:874	1efc	AMD Cards available: 4
+22:40:58:874	1efc	GPU #0: Ellesmere, 4096 MB available, 36 compute units
+22:40:58:874	1efc	GPU #0 recognized as Radeon RX 480/580
+22:40:58:874	1efc	GPU #1: Ellesmere, 8192 MB available, 36 compute units
+22:40:58:874	1efc	GPU #1 recognized as Radeon RX 480/580
+22:40:58:874	1efc	GPU #2: Ellesmere, 8192 MB available, 36 compute units
+22:40:58:874	1efc	GPU #2 recognized as Radeon RX 480/580
+22:40:58:874	1efc	GPU #3: Ellesmere, 8192 MB available, 36 compute units
+22:40:58:874	1efc	GPU #3 recognized as Radeon RX 480/580
+22:40:58:874	1efc	POOL/SOLO version
+22:40:58:890	1efc	b391
+22:40:58:890	1efc	Platform: Windows
+22:40:58:937	1efc	start building OpenCL program for GPU 0...
+22:40:59:788	1efc	done
+22:41:00:015	1efc	start building OpenCL program for GPU 1...
+22:41:00:398	1efc	done
+22:41:00:600	1efc	start building OpenCL program for GPU 2...
+22:41:00:975	1efc	done
+22:41:01:209	1efc	start building OpenCL program for GPU 3...
+22:41:01:600	1efc	done
+22:41:01:834	1efc	GPU #0: algorithm ASM
+22:41:01:850	1efc	GPU #1: algorithm ASM
+22:41:01:881	1efc	GPU #2: algorithm ASM
+22:41:01:912	1efc	GPU #3: algorithm ASM
+22:41:01:912	1efc	cudaGetDeviceCount failed (35, CUDA driver version is insufficient for CUDA runtime version), probably no CUDA devices
+22:41:01:912	1efc	No NVIDIA CUDA GPUs detected.
+22:41:01:912	1efc	Total cards: 4
+22:41:02:772	1efc	No NVIDIA cards in the list, NVML library will not be used.
+22:41:02:897	ed0	ETH: Stratum - connecting to 'eu1.ethermine.org' <188.165.226.213> port 4444
+22:41:02:912	1efc	DUAL MINING MODE ENABLED: ETHEREUM+DECRED
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 4)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 247
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:46:06:367	4a0b0700	parse packet: 400
+22:46:06:367	4a0b0700	new buf size: 0
+22:46:06:367	4a0b0700	 DCR: 07/23/17-22:46:06 - New job from dcr-as.coinmine.pl:2222
+22:46:06:367	4a0b0700	target: 0x000000000cccc000 (diff: 85GH), block #153378
+22:46:07:458	631f9740	Quit signal received...
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 4)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 247
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:46:06:367	4a0b0700	parse packet: 400
+22:46:06:367	4a0b0700	new buf size: 0
+22:46:06:367	4a0b0700	 DCR: 07/23/17-22:46:06 - New job from dcr-as.coinmine.pl:2222
+22:46:06:367	4a0b0700	target: 0x000000000cccc000 (diff: 85GH), block #153378
+22:46:07:458	631f9740	Quit signal received...
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 4)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 247
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:46:06:367	4a0b0700	parse packet: 400
+22:46:06:367	4a0b0700	new buf size: 0
+22:46:06:367	4a0b0700	 DCR: 07/23/17-22:46:06 - New job from dcr-as.coinmine.pl:2222
+22:46:06:367	4a0b0700	target: 0x000000000cccc000 (diff: 85GH), block #153378
+22:46:07:458	631f9740	Quit signal received...
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 4)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 247
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:46:06:367	4a0b0700	parse packet: 400
+22:46:06:367	4a0b0700	new buf size: 0
+22:46:06:367	4a0b0700	 DCR: 07/23/17-22:46:06 - New job from dcr-as.coinmine.pl:2222
+22:46:06:367	4a0b0700	target: 0x000000000cccc000 (diff: 85GH), block #153378
+22:46:07:458	631f9740	Quit signal received...
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 4)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 247
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:46:06:367	4a0b0700	parse packet: 400
+22:46:06:367	4a0b0700	new buf size: 0
+22:46:06:367	4a0b0700	 DCR: 07/23/17-22:46:06 - New job from dcr-as.coinmine.pl:2222
+22:46:06:367	4a0b0700	target: 0x000000000cccc000 (diff: 85GH), block #153378
+22:46:07:458	631f9740	Quit signal received...
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 4)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:42:14:965	4ad3f700	parse packet: 247
+22:42:14:966	4ad3f700	ETH: job is the same
+22:42:14:966	4ad3f700	new buf size: 0
+22:42:17:552	4ff6e700	DCR: put share nonce 301b73f enonce 290b00a4
+22:42:17:552	4ff6e700	DCR round found 1 shares
+22:42:17:552	4a0b0700	 DCR: 07/23/17-22:42:17 - SHARE FOUND - (GPU 0)
+22:42:17:552	4a0b0700	send: {"params": ["develnk.worker5", "1825", "00000000290b00a477fa1381", "5974d1d9", "3fb70103"], "id": 4, "method": "mining.submit"}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 1)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}
+
+22:31:34:891	4ad3f700	parse packet: 248
+22:31:34:891	4ad3f700	ETH: job is the same
+22:31:34:891	4ad3f700	new buf size: 0
+22:31:39:054	4b540700	ETH: put share nonce c35a66d014cff261
+22:31:39:054	4b540700	ETH round found 1 shares
+22:31:39:054	4ad3f700	ETH: 07/23/17-22:31:39 - SHARE FOUND - (GPU 0)
+22:31:39:054	4ad3f700	send: {"id":4,"method":"eth_submitWork","params":["0xc35a66d014cff261","0x41e5f07a3c3c1a4ee453d2d22baddc68e8bb541c2dc34a6aba5bb56779cf799c","0xbf7f27d76bbc92c8f93cefc9f4c7ee0fca5f028f17304b849960c2454f66c3f4"]}

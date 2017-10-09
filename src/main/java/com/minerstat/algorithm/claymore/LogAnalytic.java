@@ -2,7 +2,6 @@ package com.minerstat.algorithm.claymore;
 
 import com.minerstat.algorithm.MinerCommon;
 import com.minerstat.settings.Settings;
-import org.jetbrains.annotations.Contract;
 
 import java.io.*;
 import java.util.*;
@@ -14,20 +13,31 @@ import org.json.simple.JSONObject;
 public class LogAnalytic extends MinerCommon implements Callable<String> {
 
     private File directory;
+    private int lastLineNumber;
+    private File lastFile;
 
     LogAnalytic(File directory) {
         this.directory = directory;
+        lastLineNumber = Integer.parseInt(Settings.getInstance().getProperties("LastLineNumber"));
+        lastFile = null;
+    }
+
+    void setLastFile(File lastFile) {
+        this.lastFile = lastFile;
+    }
+
+    void setLastLineNumber(int number) {
+        this.lastLineNumber = number;
     }
 
     @Override
     public String call() throws Exception {
         String result = "";
-        String parse = "";
-        String cardInfo = "";
+        JSONObject parse = new JSONObject();
+        JSONObject cardInfo = new JSONObject();
         try {
-            File lastFile = findLastFile();
+            lastFile = (lastFile == null) ? findLastFile() : lastFile;
             if (lastFile != null) {
-                int lastLineNumber = Integer.parseInt(Settings.getInstance().getProperties("LastLineNumber"));
                 StringBuilder sb = readFile(lastFile, lastLineNumber);
                 parse = analytic(sb);
                 if (lastLineNumber == 0) {
@@ -61,8 +71,9 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
         finally {
             String lastLogFile = Settings.getInstance().getProperties("LastLogFile");
             if (lastFile != null && !lastFile.getName().equals(lastLogFile)) {
+                lastLineNumber = 0;
                 Settings.getInstance().saveProperties("LastLogFile", lastFile.getName());
-                Settings.getInstance().saveProperties("LastLineNumber", Integer.toString(0));
+                Settings.getInstance().saveProperties("LastLineNumber", Integer.toString(lastLineNumber));
             }
         }
 
@@ -105,8 +116,7 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
         return sb;
     }
 
-    @Contract(pure = true)
-    private String analytic(StringBuilder sb) {
+    private JSONObject analytic(StringBuilder sb) {
         Map<Integer, Map<String, Integer>> statistics = new HashMap<>();
 
         Pattern pattern = Pattern.compile("([A-Z]{3}):\\s(\\d+/\\d+/\\d+-\\d+:\\d+:\\d+)\\s-\\sSHARE FOUND\\s-\\s\\(GPU\\s([0-9])\\)$");
@@ -141,11 +151,10 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
             }
         }
 
-        JSONObject result = hashMapMap(statistics);
-        return result.toString();
+        return hashMapMap(statistics);
     }
 
-    private String getVideoCardInfo(StringBuilder sb) {
+    private JSONObject getVideoCardInfo(StringBuilder sb) {
         Map<Integer, CardInfo> info = new HashMap<>();
         Pattern patternGPU = Pattern.compile("GPU\\s\\#([0-9]+):\\s(.+available.+units)$");
         Pattern patternGPUSeries = Pattern.compile("GPU\\s\\#([0-9]+)\\srecognized as\\s(.+)");
@@ -170,7 +179,6 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
                     cardInfo.setValue(infoData);
                     info.put(cardId, cardInfo);
                 }
-
             }
             if (matcherGPUSeries.find()) {
                 List data = findMatchData(matcherGPUSeries);
@@ -190,8 +198,7 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
             }
         }
 
-        JSONObject result = hashMapCardInfo(info);
-        return result.toJSONString();
+        return hashMapCardInfo(info);
     }
 
     private List findMatchData(Matcher matcher) {

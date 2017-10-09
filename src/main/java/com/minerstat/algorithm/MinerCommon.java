@@ -35,7 +35,7 @@ public abstract class MinerCommon {
         return dataJson;
     }
 
-    protected JSONObject stringJson(String name, String data, String name2, String data2) {
+    protected JSONObject stringJson(String name, JSONObject data, String name2, JSONObject data2) {
         JSONObject dataJson = new JSONObject();
         dataJson.put(name, data);
         dataJson.put(name2, data2);
