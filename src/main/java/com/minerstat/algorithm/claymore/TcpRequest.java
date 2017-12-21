@@ -17,7 +17,7 @@ public class TcpRequest extends MinerCommon implements Callable<String> {
     }
 
     public String call() {
-        String result = "";
+        String result = null;
         Socket socket;
         try {
             socket = new Socket("localhost", port);

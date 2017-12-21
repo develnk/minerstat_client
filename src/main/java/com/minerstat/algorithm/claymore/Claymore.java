@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 public class Claymore extends MinerCommon implements Algorithm {
@@ -26,7 +27,6 @@ public class Claymore extends MinerCommon implements Algorithm {
     private Timer logsTimer;
 
     private TimerTask tcpTask = new TimerTask() {
-
         @Override
         public void run() {
             try {
@@ -36,7 +36,7 @@ public class Claymore extends MinerCommon implements Algorithm {
                 t.start();
                 sendData(sendToServer(task.get(), 0));
             }
-            catch (Exception e) {
+            catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
@@ -45,12 +45,16 @@ public class Claymore extends MinerCommon implements Algorithm {
     private TimerTask logsTask = new TimerTask() {
         @Override
         public void run() {
-            File directory = new File(minerDirectory);
-            Callable<String> log = new LogAnalytic(directory);
-            FutureTask<String> task = new FutureTask<>(log);
-            Thread t = new Thread(task);
-            t.start();
-
+            try {
+                File directory = new File(minerDirectory);
+                Callable<String> log = new LogAnalytic(directory);
+                FutureTask<String> task = new FutureTask<>(log);
+                Thread t = new Thread(task);
+                t.start();
+                sendData(sendToServer(task.get(), 1));
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
         }
     };
 

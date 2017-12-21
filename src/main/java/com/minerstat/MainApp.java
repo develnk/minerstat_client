@@ -7,7 +7,6 @@ import com.minerstat.controllers.PrimaryController;
 import com.minerstat.settings.Settings;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
@@ -15,18 +14,20 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.collections.ObservableMap;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Optional;
 
 public class MainApp extends Application {
 
     public static Stage primaryStage;
+    public static final String serverUrl = "http://localhost:8080/api/v1/";
     private PrimaryController primaryController;
     private static File dir = new File("src/main/");
+    public static String currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
     public static void main(String[] args) {
         launch(args);
     }
@@ -43,17 +44,13 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(new File(MainApp.dir, "resources/main.fxml").toURI().toURL());
-            VBox rootLayout = (VBox) loader.load();
+            VBox rootLayout = loader.load();
             primaryController = loader.getController();
             primaryController.setCurrentApp(this);
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we) {
-                    closeApp();
-                }
-            });
+            primaryStage.setOnCloseRequest(we -> closeApp());
             choseAlgorithm();
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,11 +66,11 @@ public class MainApp extends Application {
         alert.setHeaderText("Cancel Creation");
         alert.setContentText("Are you sure you want to cancel creation?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             primaryStage.close();
         }
 
-        if(result.get() == ButtonType.CANCEL){
+        if(result.get() == ButtonType.CANCEL) {
             alert.close();
         }
     }
@@ -94,6 +91,7 @@ public class MainApp extends Application {
         list.put("DirectoryText", primaryController.getDirectoryText().toString());
         list.put("logsFlag", primaryController.getLogsFlag().toString());
         list.put("remotePort", primaryController.getRemotePort().toString());
+        list.put("rigPaneVisible", String.valueOf(primaryController.rig_pane.isVisible()));
         Settings.getInstance().saveAllProperties(list);
     }
 
