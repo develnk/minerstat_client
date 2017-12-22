@@ -7,7 +7,10 @@ import java.util.function.Predicate;
 import javax.inject.Inject;
 
 import com.minerstat.entity.UserRig;
+import com.minerstat.entity.Worker;
+import com.minerstat.service.Common;
 import com.minerstat.service.RigService;
+import com.minerstat.service.WorkerService;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,6 +32,10 @@ public class PrimaryController {
     private MainApp app;
 
     private RigService rigService;
+
+    private WorkerService workerService;
+
+    private Common commonService;
 
     @FXML private Button directoryButton;
 
@@ -64,15 +71,22 @@ public class PrimaryController {
 
     private List<UserRig> userRigs;
 
+    private List<Worker> workerList;
+
     public PrimaryController() {
         rigService = new RigService();
         userRigs = new ArrayList<>();
+        workerList = new ArrayList<>();
+        commonService = new Common();
+        workerService = new WorkerService();
     }
 
     @FXML
     public void initialize() {
         fillRigsFromFile();
+        fillWorkerFromFile();
 
+        // Set directory with log files.
         directoryButton.setOnAction(event -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             File selectedDirectory = directoryChooser.showDialog(MainApp.primaryStage);
@@ -85,22 +99,37 @@ public class PrimaryController {
 
         visibleRigPane();
 
-        // ChoiceBox Exist_Rig
+        // ChoiceBox Exist_Rig.
         defaultExistRig();
         exist_rig.setTooltip(new Tooltip("Select the Rig"));
         exist_rig.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Settings.getInstance().saveProperties("rigId", userRigs.get(newValue.intValue()).getRigId());
+                if (newValue.intValue() <= userRigs.size() - 1) {
+                    Settings.getInstance().saveProperties("rigId", userRigs.get(newValue.intValue()).getRigId());
+                }
+            }
+        });
+
+        // ChoiceBox Exist_Worker.
+        defaultExistWorker();
+        exist_worker.setTooltip(new Tooltip("Select the Worker"));
+        exist_worker.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (newValue.intValue() <= workerList.size() - 1) {
+                    Settings.getInstance().saveProperties("workerId", workerList.get(newValue.intValue()).getWorkerId());
+                }
             }
         });
 
         server_auth.setOnAction(event -> {
-            if (!rigService.CheckAuthorizationSettings()) {
-                Boolean auth = rigService.ServiceAuthorization(user_name.getText(), password.getText());
+            if (!commonService.CheckAuthorizationSettings()) {
+                Boolean auth = commonService.authorization(user_name.getText(), password.getText());
                 if (auth) {
                     rig_pane.setVisible(true);
                     setRigs();
+                    setWorkers();
                 }
             }
         });
@@ -192,13 +221,21 @@ public class PrimaryController {
     }
 
     private void setWorkers() {
-
+        List<Worker> workerList = workerService.getUserWorkers();
+        fillWorkers(workerList);
     }
 
     private void fillRigsFromFile() {
         List<UserRig> userRigList = rigService.readUserRigs();
         if (userRigList.size() != 0) {
             fillRigs(userRigList);
+        }
+    }
+
+    private void fillWorkerFromFile() {
+        List<Worker> workersList = workerService.readWorkers();
+        if (workersList.size() != 0) {
+            fillWorkers(workersList);
         }
     }
 
@@ -214,15 +251,46 @@ public class PrimaryController {
             }
         });
 
+        int current = exist_rig.getSelectionModel().getSelectedIndex();
         exist_rig.setItems(rigs);
+        exist_rig.getSelectionModel().select(current);
+    }
+
+    private void fillWorkers(List<Worker> workerList) {
+        this.workerList = workerList;
+        ObservableList<String> workers = FXCollections.observableArrayList();
+        workerList.forEach(worker -> {
+            if (worker.getWorkerName() != null) {
+                workers.add(worker.getWorkerName());
+            }
+            else {
+                workers.add(worker.getWorkerId());
+            }
+        });
+
+        int current = exist_worker.getSelectionModel().getSelectedIndex();
+        exist_worker.setItems(workers);
+        exist_worker.getSelectionModel().select(current);
     }
 
     private void defaultExistRig() {
         String rigId = Settings.getInstance().getProperties("rigId");
-        Predicate<UserRig> predicate = c-> c.getRigId().equals(rigId);
-        UserRig  obj = userRigs.stream().filter(predicate).findFirst().get();
-        int index = userRigs.indexOf(obj);
-        exist_rig.getSelectionModel().select(index);
+        if (!rigId.isEmpty()) {
+            Predicate<UserRig> predicate = c-> c.getRigId().equals(rigId);
+            UserRig  obj = userRigs.stream().filter(predicate).findFirst().get();
+            int index = userRigs.indexOf(obj);
+            exist_rig.getSelectionModel().select(index);
+        }
+    }
+
+    private void defaultExistWorker() {
+        String workerId = Settings.getInstance().getProperties("workerId");
+        if (!workerId.isEmpty()) {
+            Predicate<Worker> predicate = c-> c.getWorkerId().equals(workerId);
+            Worker  obj = workerList.stream().filter(predicate).findFirst().get();
+            int index = workerList.indexOf(obj);
+            exist_worker.getSelectionModel().select(index);
+        }
     }
 
 }
