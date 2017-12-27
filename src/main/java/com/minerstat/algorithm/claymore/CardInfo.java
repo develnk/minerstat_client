@@ -1,41 +1,33 @@
 package com.minerstat.algorithm.claymore;
 
-import com.minerstat.algorithm.MinerCommon;
-import org.json.simple.JSONObject;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
-import java.util.Map;
+public class CardInfo {
 
-public class CardInfo extends MinerCommon {
-    private String modelName;
-    private String value;
+    @SerializedName("Model")
+    private String model;
+
+    @SerializedName("Information")
+    private String information;
 
     CardInfo() {
-        this.modelName = "";
-        this.value = "";
+        this.model = "";
+        this.information = "";
     }
 
-    void setModelName(String modelName) {
-        this.modelName = modelName;
+    void setModel(String model) {
+        this.model = model;
     }
 
-    void setValue(String value) {
-        this.value = value;
+    void setInformation(String information) {
+        this.information = information;
     }
 
-    public Map toMap() {
-        HashMap<Object, Object> map = new HashMap<>();
-        map.put("Model", modelName);
-        map.put("Information", value);
-        return map;
+    public String getModel() {
+        return model;
     }
 
-    @Override
-    public String toString() {
-        HashMap<Object, Object> map = new HashMap<>();
-        map.put("Model", modelName);
-        map.put("Information", value);
-        JSONObject result = dataToSend(map);
-        return result.toString();
+    public String getInformation() {
+        return information;
     }
 }

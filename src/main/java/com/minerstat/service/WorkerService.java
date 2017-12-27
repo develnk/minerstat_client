@@ -1,11 +1,8 @@
 package com.minerstat.service;
 
 import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
-import com.minerstat.entity.UserRig;
 import com.minerstat.entity.Worker;
 import org.apache.http.HttpResponse;
-import org.json.simple.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,13 +25,13 @@ public class WorkerService {
     public List<Worker> getUserWorkers() {
         List<Worker> result = new ArrayList<>();
         try {
-            HttpResponse response = Common.serverHttpSend("worker/all_workers");
+            HttpResponse response = Common.serverHttpPOSTSend("worker/all_workers");
             if (response.getStatusLine().getStatusCode() == 200) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                Gson gson = new Gson();
-                JSONArray serverResponse = gson.fromJson(br, JSONArray.class);
+                Gson serverGson = new Gson();
+                ArrayList serverResponse = serverGson.fromJson(br, ArrayList.class);
                 serverResponse.forEach(userRig -> {
-                    Worker object = new Gson().fromJson(new Gson().toJson(((LinkedTreeMap<String, Object>) userRig)), Worker.class);
+                    Worker object = new Gson().fromJson(new Gson().toJson(userRig), Worker.class);
                     result.add(object);
                 });
             }

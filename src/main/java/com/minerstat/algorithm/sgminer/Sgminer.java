@@ -2,7 +2,7 @@ package com.minerstat.algorithm.sgminer;
 
 import com.minerstat.algorithm.Algorithm;
 import com.minerstat.algorithm.MinerCommon;
-import org.json.simple.JSONObject;
+import com.minerstat.model.request.SendLog;
 
 public class Sgminer extends MinerCommon implements Algorithm {
     @Override
@@ -16,7 +16,7 @@ public class Sgminer extends MinerCommon implements Algorithm {
     }
 
     @Override
-    public void sendData(JSONObject data) {
+    public void sendData(SendLog data) {
 
     }
 }

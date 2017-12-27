@@ -102,24 +102,36 @@ public class PrimaryController {
         // ChoiceBox Exist_Rig.
         defaultExistRig();
         exist_rig.setTooltip(new Tooltip("Select the Rig"));
-        exist_rig.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (newValue.intValue() <= userRigs.size() - 1) {
-                    Settings.getInstance().saveProperties("rigId", userRigs.get(newValue.intValue()).getRigId());
+        exist_rig.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            int newIntValue = newValue.intValue();
+            String newRigId = "";
+            if (newIntValue <= userRigs.size() - 1) {
+                if (newIntValue == -1 && oldValue.intValue() <= userRigs.size() - 1) {
+                    newRigId = userRigs.get(oldValue.intValue()).getRigId();
                 }
+                else {
+                    newRigId = userRigs.get(newValue.intValue()).getRigId();
+                }
+
+                Settings.getInstance().saveProperties("rigId", newRigId);
             }
         });
 
         // ChoiceBox Exist_Worker.
         defaultExistWorker();
         exist_worker.setTooltip(new Tooltip("Select the Worker"));
-        exist_worker.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (newValue.intValue() <= workerList.size() - 1) {
-                    Settings.getInstance().saveProperties("workerId", workerList.get(newValue.intValue()).getWorkerId());
+        exist_worker.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            int newIntValue = newValue.intValue();
+            String newRigId = "";
+            if (newIntValue <= workerList.size() - 1) {
+                if (newIntValue == -1 && oldValue.intValue() <= workerList.size() - 1) {
+                    newRigId = workerList.get(oldValue.intValue()).getWorkerId();
                 }
+                else {
+                    newRigId = workerList.get(newValue.intValue()).getWorkerId();
+                }
+
+                Settings.getInstance().saveProperties("workerId", newRigId);
             }
         });
 
@@ -275,7 +287,7 @@ public class PrimaryController {
 
     private void defaultExistRig() {
         String rigId = Settings.getInstance().getProperties("rigId");
-        if (!rigId.isEmpty()) {
+        if (!rigId.isEmpty() && !userRigs.isEmpty()) {
             Predicate<UserRig> predicate = c-> c.getRigId().equals(rigId);
             UserRig  obj = userRigs.stream().filter(predicate).findFirst().get();
             int index = userRigs.indexOf(obj);
@@ -285,7 +297,7 @@ public class PrimaryController {
 
     private void defaultExistWorker() {
         String workerId = Settings.getInstance().getProperties("workerId");
-        if (!workerId.isEmpty()) {
+        if (!workerId.isEmpty() && !workerList.isEmpty()) {
             Predicate<Worker> predicate = c-> c.getWorkerId().equals(workerId);
             Worker  obj = workerList.stream().filter(predicate).findFirst().get();
             int index = workerList.indexOf(obj);

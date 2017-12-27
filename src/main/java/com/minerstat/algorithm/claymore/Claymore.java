@@ -1,9 +1,11 @@
 package com.minerstat.algorithm.claymore;
 
+import com.google.gson.Gson;
 import com.minerstat.algorithm.Algorithm;
 import com.minerstat.algorithm.MinerCommon;
+import com.minerstat.algorithm.claymore.model.request.TCPToServer;
+import com.minerstat.model.request.SendLog;
 import com.minerstat.settings.Settings;
-import org.json.simple.JSONObject;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -34,7 +36,7 @@ public class Claymore extends MinerCommon implements Algorithm {
                 FutureTask<String> task = new FutureTask<>(tcp);
                 Thread t = new Thread(task);
                 t.start();
-                sendData(sendToServer(task.get(), 0));
+                sendData(prepareDataToSendToServer(task.get(), 0));
             }
             catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
@@ -51,7 +53,7 @@ public class Claymore extends MinerCommon implements Algorithm {
                 FutureTask<String> task = new FutureTask<>(log);
                 Thread t = new Thread(task);
                 t.start();
-                sendData(sendToServer(task.get(), 1));
+                sendData(prepareDataToSendToServer(task.get(), 1));
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
@@ -66,7 +68,7 @@ public class Claymore extends MinerCommon implements Algorithm {
 
     public void startAlgorithm() {
         tcpTimer = new Timer();
-        tcpTimer.schedule(tcpTask, 0, 1000);
+        tcpTimer.schedule(tcpTask, 0, 10000);
         if (useLogs) {
             logsTimer = new Timer();
             logsTimer.schedule(logsTask, 0, 60000);
@@ -80,8 +82,21 @@ public class Claymore extends MinerCommon implements Algorithm {
         }
     }
 
-//    public void sendData(JSONObject data) {
-//        super.sendData(data);
-//    }
+    protected SendLog prepareDataToSendToServer(String data, int type) {
+        Gson gson = new Gson();
+        SendLog result = new SendLog();
+
+        switch (type) {
+            case 0:
+                result.setTcp(gson.fromJson(data, TCPToServer.class));
+                break;
+
+            case 1:
+                result.setLog(gson.fromJson(data, LogData.class));
+                break;
+        }
+
+        return result;
+    }
 
 }

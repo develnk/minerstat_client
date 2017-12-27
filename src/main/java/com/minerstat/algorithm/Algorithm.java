@@ -1,7 +1,5 @@
 package com.minerstat.algorithm;
 
-import org.json.simple.JSONObject;
-
 public interface Algorithm {
 
     /**

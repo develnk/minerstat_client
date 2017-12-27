@@ -1,56 +1,38 @@
 package com.minerstat.algorithm;
 
-import com.minerstat.algorithm.claymore.CardInfo;
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
+import com.minerstat.model.request.SendLog;
+import com.minerstat.service.Common;
+import com.minerstat.settings.Settings;
+import org.apache.http.HttpResponse;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Map;
 
 public abstract class MinerCommon {
 
+    private Gson gson = new Gson();
+
     /**
-     * Formatting input data for send to remote node.
      *
      * @param data
+     *   Data to send.
+     * @param type
+     *   Type of data.
      *
-     * @return JSONObject
+     * @return
      */
-    protected JSONObject dataToSend(HashMap<Object, Object > data) {
-        JSONObject dataJson = new JSONObject();
-        data.forEach((key, value) -> dataJson.put(key, value));
-        return dataJson;
-    }
+    protected SendLog prepareDataToSendToServer(String data, int type) {
+        SendLog result = new SendLog();
 
-    protected JSONObject hashMapMap(Map<Integer, Map<String, Integer>> data) {
-        JSONObject dataJson = new JSONObject();
-        data.forEach((key, value) -> dataJson.put(key, value));
-        return dataJson;
-    }
-
-    protected JSONObject hashMapCardInfo(Map<Integer, CardInfo> data) {
-        JSONObject dataJson = new JSONObject();
-        data.forEach((key, value) -> dataJson.put(key, value.toMap()));
-        return dataJson;
-    }
-
-    protected JSONObject stringJson(String name, JSONObject data, String name2, JSONObject data2) {
-        JSONObject dataJson = new JSONObject();
-        dataJson.put(name, data);
-        dataJson.put(name2, data2);
-        return dataJson;
-    }
-
-    protected JSONObject sendToServer(String data, int type) {
-        JSONObject result = new JSONObject();
         switch (type) {
             case 0:
-                result.put("tcp", data);
+                result.setTcp(data);
                 break;
 
             case 1:
-                result.put("log", data);
+                result.setLog(data);
                 break;
         }
 
@@ -60,12 +42,18 @@ public abstract class MinerCommon {
     /**
      * Send received statistic to server.
      */
-    protected void sendData(JSONObject data) {
-        JSONObject dataToSendObject = new JSONObject();
+    protected void sendData(SendLog data) {
         String currentTime = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-        dataToSendObject.put("date", currentTime);
-        dataToSendObject.put("data", data);
-        String dataToSend = dataToSendObject.toString().replaceAll("\\\\", "");
+        HashMap<String, Object> body = new HashMap<>();
+        body.put("date", currentTime);
+        body.put("data", data);
+        body.put("workerId", Settings.getInstance().getProperties("workerId"));
+
+        HttpResponse response = Common.serverHttpPOSTSend("worker/stat", gson.toJson(body));
+        if (response.getStatusLine().getStatusCode() == 200) {
+
+        }
+        System.out.println(body);
     }
 
 }

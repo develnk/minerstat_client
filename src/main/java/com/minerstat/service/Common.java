@@ -2,26 +2,24 @@ package com.minerstat.service;
 
 import com.google.gson.Gson;
 import com.minerstat.MainApp;
-import com.minerstat.entity.UserRig;
+import com.minerstat.model.request.AuthenticationRequest;
+import com.minerstat.model.response.AuthenticationResponse;
 import com.minerstat.settings.Settings;
+import org.apache.http.Consts;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.apache.http.util.EntityUtils;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import static com.minerstat.MainApp.currentDir;
 
 public class Common {
 
@@ -32,18 +30,18 @@ public class Common {
         Boolean result = false;
 
         try {
-            HashMap<String, String> body = new HashMap<>();
-            body.put("name", user_name);
-            body.put("password", password);
-            HttpResponse response = serverHttpSend("user/login", body);
-            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            Gson body = new Gson();
+            AuthenticationRequest authenticationRequest = new AuthenticationRequest(user_name, password);
+            HttpResponse response = serverHttpPOSTSend("user/login", body.toJson(authenticationRequest));
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
             Gson gson = new Gson();
-            JSONObject serverResponse = gson.fromJson(br, JSONObject.class);
-            if (response.getStatusLine().getStatusCode() == 200 && !serverResponse.get("token").equals("")) {
+            if (response.getStatusLine().getStatusCode() == 200 && !gson.fromJson(responseString, AuthenticationResponse.class).getToken().equals("")) {
                 Settings.getInstance().saveProperties("user_name", user_name);
                 Settings.getInstance().saveProperties("password", password);
-                Settings.getInstance().saveProperties("token", String.valueOf(serverResponse.get("token")));
-                System.out.println(serverResponse.get("token"));
+                String token = gson.fromJson(responseString, AuthenticationResponse.class).getToken();
+                Settings.getInstance().saveProperties("token", token);
+                System.out.println(token);
                 result = true;
             }
         } catch (IOException e) {
@@ -57,17 +55,23 @@ public class Common {
         return Settings.getInstance().getProperties("token").isEmpty();
     }
 
-    @SafeVarargs
-    public static HttpResponse serverHttpSend(String url, HashMap<String, String>... data) {
+    public static HttpResponse serverHttpPOSTSend(String url, String... data) {
         HttpResponse response = null;
 
         try {
             HttpPost request = new HttpPost(MainApp.serverUrl + url);
             if (data.length > 0) {
-                JSONObject dataToSendObject = new JSONObject();
-                data[0].forEach(dataToSendObject::put);
-                String dataToSend = dataToSendObject.toString();
-                StringEntity params = new StringEntity(dataToSend);
+                Gson dataToSendObject = new Gson();
+                String dataToSend = "";
+                if (data.length == 1) {
+                    dataToSend = data[0];
+                }
+                else {
+                    dataToSend = dataToSendObject.toJson(data, String[].class);
+                }
+//                String dataToSend = "{\"workerId\":\"b792a33d-de9c-4f26-b1da-12041d8e7e29\",\"data\":{\"log\":{\"eth_total\":{\"total_hash\":\"104959\",\"number\":\"34\",\"rejected\":1,\"invalid\":\"\"},\"dec_total\":{\"total_hash\":\"1\",\"number\":\"34\",\"rejected\":\"1\",\"invalid\":\"\"},\"all_gpu\":[{\"eth_hash\":\"26251\",\"dec_hash\":\"249392\",\"temp\":\"63\",\"fan_speed\":\"71\"},{\"eth_hash\":\"26220\",\"dec_hash\":\"249099\",\"temp\":\"69\",\"fan_speed\":\"71\"},{\"eth_hash\":\"26240\",\"dec_hash\":\"249285\",\"temp\":\"59\",\"fan_speed\":\"50\"},{\"eth_hash\":\"26262\",\"dec_hash\":\"249489\",\"temp\":\"60\",\"fan_speed\":\"72\"}],\"work_time\":\"20\"}}}";
+                ContentType contentType = ContentType.create("application/json", Consts.UTF_8);
+                StringEntity params = new StringEntity(dataToSend, contentType);
                 request.setEntity(params);
             }
 
@@ -96,7 +100,7 @@ public class Common {
                 inputStream.read(allBytes);
                 String buffer = new String(allBytes, 0, (int) fileSize, "UTF-8");
                 Gson gson = new Gson();
-                JSONArray arrayResult = gson.fromJson(buffer, JSONArray.class);
+                ArrayList arrayResult = gson.fromJson(buffer, ArrayList.class);
                 arrayResult.forEach((Object o) -> {
                     Object userRigTemp = new Gson().fromJson(new Gson().toJson(o), className);
                     result.add(userRigTemp);

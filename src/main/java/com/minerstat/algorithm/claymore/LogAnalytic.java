@@ -1,6 +1,8 @@
 package com.minerstat.algorithm.claymore;
 
+import com.google.gson.Gson;
 import com.minerstat.algorithm.MinerCommon;
+import com.minerstat.algorithm.claymore.model.request.ParseRequest;
 import com.minerstat.settings.Settings;
 
 import java.io.*;
@@ -8,18 +10,19 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.json.simple.JSONObject;
 
 public class LogAnalytic extends MinerCommon implements Callable<String> {
 
     private File directory;
     private int lastLineNumber;
     private File lastFile;
+    private Gson gson;
 
     LogAnalytic(File directory) {
         this.directory = directory;
         lastLineNumber = Integer.parseInt(Settings.getInstance().getProperties("LastLineNumber"));
         lastFile = null;
+        gson = new Gson();
     }
 
     void setLastFile(File lastFile) {
@@ -33,20 +36,20 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
     @Override
     public String call() throws Exception {
         String result = "";
-        JSONObject parse = new JSONObject();
-        JSONObject cardInfo = new JSONObject();
+        ParseRequest parseRequest = new ParseRequest();
+
         try {
             lastFile = (lastFile == null) ? findLastFile() : lastFile;
             if (lastFile != null) {
                 StringBuilder sb = readFile(lastFile, lastLineNumber);
-                parse = analytic(sb);
+                parseRequest.setLog(analytic(sb));
                 if (lastLineNumber == 0) {
-                    cardInfo = getVideoCardInfo(sb);
+                    parseRequest.setInfo(getVideoCardInfo(sb));
                 }
             }
         }
         finally {
-            result = stringJson("log", parse, "info", cardInfo).toJSONString().replaceAll("\\\\", "");
+            result = gson.toJson(parseRequest);
         }
 
         return result;
@@ -116,7 +119,7 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
         return sb;
     }
 
-    private JSONObject analytic(StringBuilder sb) {
+    private Map analytic(StringBuilder sb) {
         Map<Integer, Map<String, Integer>> statistics = new HashMap<>();
 
         Pattern pattern = Pattern.compile("([A-Z]{3}):\\s(\\d+/\\d+/\\d+-\\d+:\\d+:\\d+)\\s-\\sSHARE FOUND\\s-\\s\\(GPU\\s([0-9])\\)$");
@@ -151,10 +154,10 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
             }
         }
 
-        return hashMapMap(statistics);
+        return statistics;
     }
 
-    private JSONObject getVideoCardInfo(StringBuilder sb) {
+    private Map getVideoCardInfo(StringBuilder sb) {
         Map<Integer, CardInfo> info = new HashMap<>();
         Pattern patternGPU = Pattern.compile("GPU\\s\\#([0-9]+):\\s(.+available.+units)$");
         Pattern patternGPUSeries = Pattern.compile("GPU\\s\\#([0-9]+)\\srecognized as\\s(.+)");
@@ -171,12 +174,12 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
                 boolean isVideo = info.containsKey(cardId);
                 if (isVideo) {
                     CardInfo CardInfo = info.get(cardId);
-                    CardInfo.setValue(infoData);
+                    CardInfo.setInformation(infoData);
                     info.put(cardId, CardInfo);
                 }
                 else {
                     CardInfo cardInfo = new CardInfo();
-                    cardInfo.setValue(infoData);
+                    cardInfo.setInformation(infoData);
                     info.put(cardId, cardInfo);
                 }
             }
@@ -187,18 +190,18 @@ public class LogAnalytic extends MinerCommon implements Callable<String> {
                 boolean isVideo = info.containsKey(cardId);
                 if (isVideo) {
                     CardInfo CardInfo = info.get(cardId);
-                    CardInfo.setModelName(infoData);
+                    CardInfo.setModel(infoData);
                     info.put(cardId, CardInfo);
                 }
                 else {
                     CardInfo cardInfo = new CardInfo();
-                    cardInfo.setModelName(infoData);
+                    cardInfo.setModel(infoData);
                     info.put(cardId, cardInfo);
                 }
             }
         }
 
-        return hashMapCardInfo(info);
+        return info;
     }
 
     private List findMatchData(Matcher matcher) {
